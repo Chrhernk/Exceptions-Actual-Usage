@@ -8,6 +8,7 @@ void NewAccount();
 void LogIn();
 
 //public usernames and passwords - array format
+// Need to make these files, so they can be saved to the perminant solution
 const int MAXARRAY = 5;
 std::string Users[MAXARRAY];
 std::string Passwords[MAXARRAY];
@@ -127,3 +128,5 @@ void LogIn()
 		}
 	}
 }
+
+//TODO - Make the Username, Passwords, and Data savable to files under diffrent names
