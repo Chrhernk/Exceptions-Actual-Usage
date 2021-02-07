@@ -4,25 +4,25 @@
 //inclusions
 
 //Prototype Functions
-bool Banking();
-void NewAccount();
-void LogIn();
-void SaveFiles();
-void LoadFiles();
-void DumpFiles();
+bool Banking(); // function for introduction
+void NewAccount(); // makes the new account
+void LogIn(); // Logs the old accounts in
+void SaveFiles(); // saves files
+void LoadFiles(); // Loads files
+void DumpFiles(); // Dumps files to screen
 
 //public usernames and passwords - array format
-// Need to make these files, so they can be saved to the perminant solution
 const int MAXARRAY = 5;
 std::string Users[MAXARRAY];
 std::string Passwords[MAXARRAY];
+// now save and load to the Files
 
 int main() // Main function
 {
-	LoadFiles(); // loads the array up
+	LoadFiles(); // loads the array up with previously saved data
 	for (int i = 0; i < MAXARRAY; i++) { Users[i] == ""; Passwords[i] == ""; } // INIT arrays for use
-	std::cout << "\n\n\t *** Exception Actual showcase *** \n\n " << std::endl;
-	std::cout << " This is a Showcase of Programmed Exceptions, as well as other Functions\n" << std::endl;
+	std::cout << "\n\n\t *** Exception Actual and saved data showcase *** \n\n " << std::endl;
+	//std::cout << " This is a Showcase of Programmed Exceptions, as well as other Functions\n" << std::endl; // commented out for beauty sake
 	while (!Banking()) {} // Loops Banking function until retun = true
 	return 0;
 }
@@ -136,50 +136,57 @@ void LogIn()
 	}
 }
 
-void SaveFiles()
+void SaveFiles() // saves all input data into an array
 {
 	std::ofstream UsernameFile("UserNames.txt"), PasswordFile("PassWords.txt");
-	if (UsernameFile.is_open() && PasswordFile.is_open())
+
+	if (UsernameFile.is_open() && PasswordFile.is_open()) // checks if the file is open before saving
 	{
-		for (int i = 0; i < MAXARRAY; i++)
+		for (int i = 0; i < MAXARRAY; i++) // Array for loop
 		{
 
-			UsernameFile << Users[i];
-			PasswordFile << Passwords[i];
+			UsernameFile << Users[i]; // saves the Username to the file
+			PasswordFile << Passwords[i]; // Saves the Password to the file
 
 		}
 	}
-	UsernameFile.close();
+	UsernameFile.close(); // closes the file(s)
 	PasswordFile.close();
 }
 
-void LoadFiles()
+void LoadFiles() // Loads and inits the data into the array
 {
-	std::ifstream UsernameFile("UserNames.txt"), PasswordFile("PassWords.txt");
+	std::ifstream UsernameFile("UserNames.txt"), PasswordFile("PassWords.txt"); // checks if the files are open before loading from them
 	if (UsernameFile.is_open() && PasswordFile.is_open())
+
 	{
 		for (int i = 0; i < MAXARRAY; i++)
 		{
-			std::getline(UsernameFile, Users[i]);
-			std::getline(PasswordFile, Passwords[i]);
+			std::getline(UsernameFile, Users[i]); // loads up the User Array
+			std::getline(PasswordFile, Passwords[i]); // Loads up the passwords Array
 		}
 	}
-	UsernameFile.close();
+	UsernameFile.close(); // closes the file(s)
 	PasswordFile.close();
 }
 
-void DumpFiles()
+void DumpFiles() // Program to dump file contents to screen
 {
-	std::string DisplayFile1;
-	std::string DisplayFile2;
-	std::ifstream UsernameFile("UserNames.txt"), PasswordFile("PassWords.txt");
-	std::cout << "These are all current users of Program : \n ---------------------------- \n";
-	while (std::getline(UsernameFile, DisplayFile1))
+	std::string DisplayFile1; // Display string 1
+	std::string DisplayFile2; // Display string 2
+
+	std::ifstream UsernameFile("UserNames.txt"), PasswordFile("PassWords.txt");  // inits the files fo use
+
+	std::cout << "These are all current users of Program : \n ---------------------------- \n"; // breaker
+
+	while (std::getline(UsernameFile, DisplayFile1)) // While there is content, it will print
 	{
 		std::cout << DisplayFile1 << ("\n");
 	}
-	std::cout << "\n ---------------------------- \nThese are all current Passwords of Program :\n ---------------------------- \n";
-	while (std::getline(PasswordFile, DisplayFile2))
+
+	std::cout << "\n ---------------------------- \nThese are all current Passwords of Program :\n ---------------------------- \n"; // breaker 2
+
+	while (std::getline(PasswordFile, DisplayFile2))// while there is content, it will print
 	{
 		std::cout << DisplayFile2 << ("\n");
 	}
