@@ -142,7 +142,7 @@ void SaveFiles() // saves all input data into an array
 
 	if (UsernameFile.is_open() && PasswordFile.is_open()) // checks if the file is open before saving
 	{
-		for (int i = 0; i < MAXARRAY; i++) // Array for loop
+		for (int i = 0; i < MAXARRAY; i++) // the arrays for loop, makes sure that it reads all data and saves it into the files
 		{
 
 			UsernameFile << Users[i]; // saves the Username to the file
@@ -160,7 +160,7 @@ void LoadFiles() // Loads and inits the data into the array
 	if (UsernameFile.is_open() && PasswordFile.is_open())
 
 	{
-		for (int i = 0; i < MAXARRAY; i++)
+		for (int i = 0; i < MAXARRAY; i++) // the arrays for loop, makes sure that it reads all data and loads it into the array
 		{
 			std::getline(UsernameFile, Users[i]); // loads up the User Array
 			std::getline(PasswordFile, Passwords[i]); // Loads up the passwords Array
