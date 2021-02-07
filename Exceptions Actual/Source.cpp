@@ -1,11 +1,15 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 //inclusions
 
 //Prototype Functions
 bool Banking();
 void NewAccount();
 void LogIn();
+void SaveFiles();
+void LoadFiles();
+void DumpFiles();
 
 //public usernames and passwords - array format
 // Need to make these files, so they can be saved to the perminant solution
@@ -15,6 +19,7 @@ std::string Passwords[MAXARRAY];
 
 int main() // Main function
 {
+	LoadFiles(); // loads the array up
 	for (int i = 0; i < MAXARRAY; i++) { Users[i] == ""; Passwords[i] == ""; } // INIT arrays for use
 	std::cout << "\n\n\t *** Exception Actual showcase *** \n\n " << std::endl;
 	std::cout << " This is a Showcase of Programmed Exceptions, as well as other Functions\n" << std::endl;
@@ -27,7 +32,8 @@ bool Banking()// Begining Function
 	std::string Selection (""); // Inting an empty string
 
 	std::cout << "\n\n Welcome to the United States Federal Banking Service, How may We assist you today?\n" << std::endl;
-	std::cout << "Are you here to make a [New Account]? Or [Log In] to an existing one? Or, Would you like to [Exit] the Program? \n\n" << std::endl;
+	std::cout << "Are you here to make a [New Account]? Or [Log In] to an existing one? Or, Would you like to [Exit] the Program? \n" << std::endl;
+	std::cout << "If you are an admin, Please use [Dump] to show all file data \n\n" << std::endl;
 	std::getline(std::cin, Selection);
 	
 	// std::cout << Selection << std::endl; << Debugging line
@@ -36,6 +42,7 @@ bool Banking()// Begining Function
 		if (!Selection.compare("New Account")) { NewAccount(); } // if the selection matches the string input, It would move to making a new account
 		else if (!Selection.compare("Log In")) { LogIn(); } // If the selection matches, Moves onto the Log In screen
 		else if (!Selection.compare("Exit")) { return true; } // if Exit is input, it willexit the program in its entireity 
+		else if (!Selection.compare("Dump")) { DumpFiles(); }
 		else { throw 11; } // if somthing dosnt match, it will throw Exception 11
 	}
 	catch (int error_code) // catches an int error
@@ -88,7 +95,7 @@ void NewAccount() //
 
 				std::cout << "Please Enter an account Password : ";
 				std::getline(std::cin, Passwords[i]); // this will set the password to the same line in the password area
-
+				SaveFiles(); // saves the username and password for future use
 				LogIn(); // forces the running of the log in set
 				break; // breaks the loop
 		}
@@ -128,5 +135,53 @@ void LogIn()
 		}
 	}
 }
+
+void SaveFiles()
+{
+	std::ofstream UsernameFile("UserNames.txt"), PasswordFile("PassWords.txt");
+	if (UsernameFile.is_open() && PasswordFile.is_open())
+	{
+		for (int i = 0; i < MAXARRAY; i++)
+		{
+
+			UsernameFile << Users[i];
+			PasswordFile << Passwords[i];
+
+		}
+	}
+	UsernameFile.close();
+	PasswordFile.close();
+}
+
+void LoadFiles()
+{
+	std::ifstream UsernameFile("UserNames.txt"), PasswordFile("PassWords.txt");
+	if (UsernameFile.is_open() && PasswordFile.is_open())
+	{
+		for (int i = 0; i < MAXARRAY; i++)
+		{
+			std::getline(UsernameFile, Users[i]);
+			std::getline(PasswordFile, Passwords[i]);
+		}
+	}
+	UsernameFile.close();
+	PasswordFile.close();
+}
+
+void DumpFiles()
+{
+	std::string DisplayFile1;
+	std::string DisplayFile2;
+	std::ifstream UsernameFile("UserNames.txt"), PasswordFile("PassWords.txt");
+	while (std::getline(UsernameFile, DisplayFile1))
+	{
+		std::cout << DisplayFile1;
+	}
+	while (std::getline(PasswordFile, DisplayFile2))
+	{
+		std::cout << DisplayFile2;
+	}
+}
+
 
 //TODO - Make the Username, Passwords, and Data savable to files under diffrent names
