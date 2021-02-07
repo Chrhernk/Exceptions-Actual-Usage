@@ -184,6 +184,3 @@ void DumpFiles()
 		std::cout << DisplayFile2 << ("\n");
 	}
 }
-
-
-//TODO - Make the Username, Passwords, and Data savable to files under diffrent names
