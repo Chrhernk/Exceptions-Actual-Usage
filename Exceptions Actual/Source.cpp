@@ -145,8 +145,8 @@ void SaveFiles() // saves all input data into an array
 		for (int i = 0; i < MAXARRAY; i++) // the arrays for loop, makes sure that it reads all data and saves it into the files
 		{
 
-			UsernameFile << Users[i]; // saves the Username to the file
-			PasswordFile << Passwords[i]; // Saves the Password to the file
+			UsernameFile << Users[i] << ("\n"); // saves the Username to the file
+			PasswordFile << Passwords[i] << ("\n"); // Saves the Password to the file
 
 		}
 	}
