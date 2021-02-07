@@ -42,7 +42,7 @@ bool Banking()// Begining Function
 		if (!Selection.compare("New Account")) { NewAccount(); } // if the selection matches the string input, It would move to making a new account
 		else if (!Selection.compare("Log In")) { LogIn(); } // If the selection matches, Moves onto the Log In screen
 		else if (!Selection.compare("Exit")) { return true; } // if Exit is input, it willexit the program in its entireity 
-		else if (!Selection.compare("Dump")) { DumpFiles(); }
+		else if (!Selection.compare("Dump")) { DumpFiles(); } // Dumps files to screen
 		else { throw 11; } // if somthing dosnt match, it will throw Exception 11
 	}
 	catch (int error_code) // catches an int error
@@ -173,13 +173,15 @@ void DumpFiles()
 	std::string DisplayFile1;
 	std::string DisplayFile2;
 	std::ifstream UsernameFile("UserNames.txt"), PasswordFile("PassWords.txt");
+	std::cout << "These are all current users of Program : \n ---------------------------- \n";
 	while (std::getline(UsernameFile, DisplayFile1))
 	{
-		std::cout << DisplayFile1;
+		std::cout << DisplayFile1 << ("\n");
 	}
+	std::cout << "\n ---------------------------- \nThese are all current Passwords of Program :\n ---------------------------- \n";
 	while (std::getline(PasswordFile, DisplayFile2))
 	{
-		std::cout << DisplayFile2;
+		std::cout << DisplayFile2 << ("\n");
 	}
 }
 
